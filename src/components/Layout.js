@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <SEO />
-      <div className="flex flex-col min-h-screen bg-gray-200">
+      <div className="flex flex-col min-h-screen">
         <header className="p-4 bg-green-700 text-white font-semibold">
           <h1 className="max-w-4xl mx-auto">The Shoppies</h1>
         </header>
