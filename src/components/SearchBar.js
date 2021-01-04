@@ -21,6 +21,7 @@ const SearchBar = ({ handleSubmit, setSearchTerm, searchTerm }) => {
           name="title"
           onChange={e => {
             setSearchTerm(e.target.value)
+            handleSubmit()
           }}
           value={searchTerm}
           className="py-2 px-3 w-10/12 rounded-l text-grey-darkest"

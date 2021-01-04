@@ -45,7 +45,6 @@ const IndexPage = () => {
           searchResults={searchResults}
           searchTerm={searchTerm}
           handleNomination={handleNomination}
-          disabled={nominations.length >= 5 ? true : false}
         />
         <Nominations
           nominations={nominations}
