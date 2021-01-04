@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import Layout from "../components/Layout"
 import axios from "axios"
 import SearchBar from "../components/SearchBar"
+import SearchResults from "../components/SearchResults"
+import Nominations from "../components/Nominations"
 
 const IndexPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -11,12 +13,25 @@ const IndexPage = () => {
   const handleSubmit = async e => {
     try {
       const data = await axios.get(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`
+        `http://www.omdbapi.com/?apikey=${process.env.API_KEY}&s=${searchTerm}`
       )
       setSearchResults(data.data.Search)
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleNomination = result => {
+    if (nominations.length < 5) {
+      setNominations(prevNominations => [...prevNominations, result])
+    }
+  }
+
+  const handleDeleteNomination = nomination => {
+    const tmpNominations = nominations.filter(
+      n => n.imdbID !== nomination.imdbID
+    )
+    setNominations(tmpNominations)
   }
   return (
     <Layout>
@@ -26,34 +41,16 @@ const IndexPage = () => {
         searchTerm={searchTerm}
       />
       <section className="mx-auto w-8/12 h-1/3 flex justify-between">
-        <div className="bg-gray-200 w-5/12">
-          <h3>Results for {searchTerm}</h3>
-          <ul>
-            {searchResults.map(result => (
-              <li key={result.Title}>
-                {result.Title}{" "}
-                <button
-                  onClick={() => {
-                    setNominations(prevNominations => [
-                      ...prevNominations,
-                      result,
-                    ])
-                  }}
-                >
-                  Nominate
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="bg-gray-200 w-5/12">
-          <h3>Nominations</h3>
-          <ul>
-            {nominations.map(nomination => (
-              <li key={nomination.Title}>{nomination.Title}</li>
-            ))}
-          </ul>
-        </div>
+        <SearchResults
+          searchResults={searchResults}
+          searchTerm={searchTerm}
+          handleNomination={handleNomination}
+          disabled={nominations.length >= 5 ? true : false}
+        />
+        <Nominations
+          nominations={nominations}
+          handleDeleteNomination={handleDeleteNomination}
+        />
       </section>
     </Layout>
   )
