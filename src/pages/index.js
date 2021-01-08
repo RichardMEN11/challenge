@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Layout from "../components/Layout"
 import axios from "axios"
 import SearchBar from "../components/SearchBar"
 import SearchResults from "../components/SearchResults"
 import Nominations from "../components/Nominations"
+import Swoosh from "../sounds/Swoosh.mp3"
+import Boing from "../sounds/Boing.mp3"
 
 const IndexPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -26,6 +28,9 @@ const IndexPage = () => {
 
   const handleNomination = result => {
     if (nominations.length < 5) {
+      const audio = new Audio(Swoosh)
+      audio.play()
+
       setNominations(prevNominations => [...prevNominations, result])
     }
   }
@@ -34,6 +39,10 @@ const IndexPage = () => {
     const tmpNominations = nominations.filter(
       n => n.imdbID !== nomination.imdbID
     )
+
+    const audio = new Audio(Boing)
+    audio.play()
+
     setNominations(tmpNominations)
   }
   return (
