@@ -14,7 +14,10 @@ const SearchBar = ({ handleSubmit, setSearchTerm, searchTerm }) => {
           htmlFor="title"
           className="block mb-2 text-lg text-gray-700 uppercase font-bold"
         >
-          Movie Title <span role="img">🎬</span>
+          Movie Title{" "}
+          <span role="img" aria-label="emoji">
+            🎬
+          </span>
         </label>
         <input
           type="text"
