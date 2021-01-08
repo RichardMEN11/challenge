@@ -17,7 +17,7 @@ const IndexPage = () => {
     try {
       setLoading(true)
       const data = await axios.get(
-        `http://www.omdbapi.com/?apikey=7cd8fb3e&s=${searchTerm}`
+        `https://www.omdbapi.com/?apikey=7cd8fb3e&s=${searchTerm}`
       )
       setSearchResults(data.data.Search)
       setLoading(false)
