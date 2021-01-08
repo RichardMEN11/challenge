@@ -2,7 +2,7 @@ import React from "react"
 
 const Nominations = ({ nominations, handleDeleteNomination }) => {
   return (
-    <div className="bg-gray-200  w-5/12 py-5 pl-3 rounded">
+    <div className="bg-gray-200 py-5 pl-3 rounded w-full md:w-5/12 mt-3 md:mt-0">
       <h3 className="text-lg uppercase text-gray-700 font-bold mb-1">
         Nominations <span role="img">⭐️</span>
       </h3>
@@ -22,6 +22,12 @@ const Nominations = ({ nominations, handleDeleteNomination }) => {
           </li>
         ))}
       </ul>
+
+      {nominations.length === 5 ? (
+        <p className="underline text-center mt-3">
+          ⭐️ You found you´re nominations ⭐️
+        </p>
+      ) : null}
     </div>
   )
 }
